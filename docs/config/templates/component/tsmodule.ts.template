@@ -1,0 +1,4 @@
+{% extends "./base.ts.template" %}
+{% block router %}
+//routing goes here
+{% endblock %}

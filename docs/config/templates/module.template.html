@@ -1,0 +1,14 @@
+{% extends "common.template.html" %}
+
+{% block heading %}
+	<h1>{$ doc.name $}<small>{$ doc.docType $}</small></h1>
+{% endblock %}
+
+{% block content %}
+	{% for export in doc.exports -%}
+		<div routerLink="['{$ export.name $}']">
+			<label>{$ export.name $}</label>
+			<span> View Documantation for {$ export.name $}
+		</div>
+	{% endfor -%}
+{% endblock %}

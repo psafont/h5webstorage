@@ -1,0 +1,10 @@
+import {Component} from "angular2/core";
+{% block router %}
+{% endblock %}
+@Component({
+	selector:'api[name="{$ doc.name $}"]',
+	template: '{$ doc.templateUrl $}'
+})
+export class {$ doc.name $}{
+	
+}
