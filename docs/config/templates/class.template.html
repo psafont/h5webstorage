@@ -1,4 +1,19 @@
 {% extends "common.template.html" %}
 
-	This is a class
+{% block heading %}
+	<h1>{$ doc.name $}<small>{$ doc.docType $}</small></h1>
+{% endblock %}
+{% block content %}
+	{$ doc.constructorDoc | inspect $}
+	
+	{% if doc.constructorDoc %}
+	<section>
+		
+	</section>
+	{% endif %}
+	<section location="foot">
+		from <a routeLink="['']">{$ doc.moduleDoc.name $} in {$ doc.fileInfo.projectRelativePath $}
+	</section>
+		
+{% endblock %}
 

@@ -1,4 +1,14 @@
 {% extends "./base.ts.template" %}
 {% block router %}
-//routing goes here
+import {RouteConfig} from "angular2/router";
+{% for export in doc.exports -%}
+import {{$ export.name $}} from ".{$ export.path $}";
+{% endfor -%}
+
+
+@RouteConfig({
+	{% for export in doc.exports -%}
+	{ path: '/{$ export.name.toLowerCase() $}', name: '{$ export.name $}', component: {$ export.name $} },
+	{% endfor -%}
+})
 {% endblock %}

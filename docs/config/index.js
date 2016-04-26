@@ -23,13 +23,14 @@ module.exports = new Package('h5webstorage', [
 		];
 	})
 	.processor(require("./processors/test"))
+	.processor(require("./processors/test2"))
 
 	.config(function (dgeni, log, readTypeScriptModules, readFilesProcessor, writeFilesProcessor) {
 		dgeni.stopOnValidationError = true;
 		dgeni.stopOnProcessingError = true;
 
 		log.level = 'info';
-		//log.add(log.transports.File, {filename: 'somefile.log', handleExceptions: true});
+		log.add(log.transports.File, {filename: './dist/somefile.log', handleExceptions: true});
 
 		readTypeScriptModules.basePath = path.resolve(packagePath, '../../src')
 		readTypeScriptModules.sourceFiles = [
