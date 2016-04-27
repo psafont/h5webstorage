@@ -10,6 +10,7 @@ module.exports = new Package('h5webstorage', [
 	require('dgeni-packages/nunjucks'),
 	require('dgeni-packages/typescript')
 ])
+	.factory(require("./transforms/associateType"))
 	.factory('EXPORT_DOC_TYPES', function () {
 		return [
 			'class',
@@ -23,14 +24,17 @@ module.exports = new Package('h5webstorage', [
 		];
 	})
 	.processor(require("./processors/test"))
-	.processor(require("./processors/test2"))
 
-	.config(function (dgeni, log, readTypeScriptModules, readFilesProcessor, writeFilesProcessor) {
+	.config(function (dgeni, log, readTypeScriptModules, readFilesProcessor, writeFilesProcessor, parseTagsProcessor, associateTypeTransform) {
+		var parsing = parseTagsProcessor.tagDefinitions.filter(function(parser){
+			return parser.name == "param";
+		});
+		parsing[0].transforms.push(associateTypeTransform);
 		dgeni.stopOnValidationError = true;
 		dgeni.stopOnProcessingError = true;
 
 		log.level = 'info';
-		log.add(log.transports.File, {filename: './dist/somefile.log', handleExceptions: true});
+		//log.add(log.transports.File, {filename: './dist/somefile.log', handleExceptions: true});
 
 		readTypeScriptModules.basePath = path.resolve(packagePath, '../../src')
 		readTypeScriptModules.sourceFiles = [
