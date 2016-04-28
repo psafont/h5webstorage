@@ -4,14 +4,39 @@
 	<h1>{$ doc.name $}<small>{$ doc.docType $}</small></h1>
 {% endblock %}
 {% block content %}
-	{$ doc.constructorDoc | inspect $}
-	
+	<script>
+	{$ doc.members | inspect $}
+	</script>
+	<section type="overview">
+		class {$ doc.name $} {
+		{% if doc.constructorDoc %}
+		<div>
+			constructor(
+				{% for param in doc.constructorDoc.params %}
+					{$ param.name $}: {$ param.typeExpression $}
+				{% endfor %}
+			)
+		{% endif %}		
+		{% for member in doc.members %}
+		{% endfor %}
+		}
+	</section>
+	<section>
+		{$ doc.description | marked $}
+	</section>
 	{% if doc.constructorDoc %}
 	<section>
-		
+		<a name="constructor">constructor</a>
+		{$ doc.constructorDoc.description | marked or "<i>Nothing to see here</i>" $}
 	</section>
 	{% endif %}
-	<section location="foot">
+	{% for member in doc.members %}
+	<section>
+		<a name="{$ member.name $}">{$ member.name $}</a>
+		{$ member.description | marked or "<i>Not documented yet" $}
+	</section>
+	{% endfor %}
+	<section type="foot">
 		from <a routeLink="['']">{$ doc.moduleDoc.name $} in {$ doc.fileInfo.projectRelativePath $}
 	</section>
 		

@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "canonical-path": "0.0.2",
+    "catharsis": "^0.8.7",
     "codeclimate-test-reporter": "^0.3.1",
     "concurrently": "^2.0.0",
     "dgeni": "^0.4.2",

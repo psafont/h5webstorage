@@ -8,7 +8,8 @@ var Package = require('dgeni').Package;
 module.exports = new Package('h5webstorage', [
 	require('dgeni-packages/jsdoc'),
 	require('dgeni-packages/nunjucks'),
-	require('dgeni-packages/typescript')
+	require('dgeni-packages/typescript'),
+	require('dgeni-packages/links')
 ])
 	.factory(require("./transforms/associateType"))
 	.factory('EXPORT_DOC_TYPES', function () {
@@ -25,11 +26,7 @@ module.exports = new Package('h5webstorage', [
 	})
 	.processor(require("./processors/test"))
 
-	.config(function (dgeni, log, readTypeScriptModules, readFilesProcessor, writeFilesProcessor, parseTagsProcessor, associateTypeTransform) {
-		var parsing = parseTagsProcessor.tagDefinitions.filter(function(parser){
-			return parser.name == "param";
-		});
-		parsing[0].transforms.push(associateTypeTransform);
+	.config(function (dgeni, log, readTypeScriptModules, readFilesProcessor, writeFilesProcessor) {
 		dgeni.stopOnValidationError = true;
 		dgeni.stopOnProcessingError = true;
 
@@ -38,7 +35,8 @@ module.exports = new Package('h5webstorage', [
 
 		readTypeScriptModules.basePath = path.resolve(packagePath, '../../src')
 		readTypeScriptModules.sourceFiles = [
-			{ include: 'api.ts', exclude: '*spec.ts', basePath: "." },
+			'basestorage.ts',
+			'api.ts',
 		]
 
 		readFilesProcessor.basePath = path.resolve(packagePath, '../');
@@ -63,6 +61,12 @@ module.exports = new Package('h5webstorage', [
 		].concat(templateEngine.templatePatterns);
 		
 		templateEngine.filters = templateEngine.filters.concat([require("./filters/inspect")])
+	})
+	.config(function(parseTagsProcessor, associateTypeTransform){
+		var parsing = parseTagsProcessor.tagDefinitions.filter(function(parser){
+			return parser.name == "param";
+		});
+		parsing[0].transforms.push(associateTypeTransform);		
 	})
 
 	.config(function (computePathsProcessor, computeIdsProcessor, EXPORT_DOC_TYPES) {

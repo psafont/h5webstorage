@@ -33,10 +33,13 @@ module.exports = function dgeniSpy(log) {
 					path: "/" + doc.name,
 					templateUrl: doc.name + ".html",
 					name: doc.name,
-					moduleDoc: { path: "/"},
+					moduleDoc: { path: ""},
 					exports: doc.exports
 				};
 				docs.push(data);
+				var tmp = data;
+				delete tmp.exports;
+				log.silly(tmp);
 			})
 		}
 	}
