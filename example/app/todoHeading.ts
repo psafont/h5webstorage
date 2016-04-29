@@ -1,6 +1,6 @@
 import {Component, Output, EventEmitter, ViewChildren, QueryList, AfterViewInit, Input} from "angular2/core";
 import {NgFor, NgModel, NgIf} from "angular2/common";
-import {LOCAL_STORAGE_PROVIDER, LocalStorage, ConfigureStorage} from "../../src/api";
+import {LocalStorage, ConfigureStorage} from "../../src/api";
 
 @Component({
 	selector: "todo-heading",
@@ -10,7 +10,7 @@ import {LOCAL_STORAGE_PROVIDER, LocalStorage, ConfigureStorage} from "../../src/
 		<select [(ngModel)]="settings.list" *ngIf="!isEditing">
 			<option value="">New List</option>
 			<optgroup label="Your lists">
-			<option template="ngFor #list of lists" [value]="list">{{list}}</option>
+			<option template="ngFor let list of lists" [value]="list">{{list}}</option>
 			</optgroup>
 		</select>
 		<span *ngIf="isEditing"><input #listName type="text"><button (click)="createList(listName.value)">Add</button><button (click)="isEditing=false">Cancel</button></span>
@@ -21,7 +21,7 @@ import {LOCAL_STORAGE_PROVIDER, LocalStorage, ConfigureStorage} from "../../src/
 	 * We take advantage of the injector hirearchy and create a new LocalStorage service but this one will be configured
 	 * to deal only with keys with the specified prefix. All todo lists will begin with a '/'
 	 */
-	providers: [LOCAL_STORAGE_PROVIDER, ConfigureStorage({ prefix: "/" })],
+	providers: [ConfigureStorage({ prefix: "/" })],
 	directives: [NgFor, NgModel, NgIf]
 })
 export class TodoHeading implements AfterViewInit {
