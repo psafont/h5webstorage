@@ -17,6 +17,7 @@ module.exports = function (config) {
       'karma-systemjs',
       'karma-sauce-launcher',
       'karma-chrome-launcher',
+      'karma-firefox-launcher',
       'karma-ie-launcher',
       'karma-coverage'
     ],
@@ -119,7 +120,7 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'IE'],
+    browsers: ['Chrome', 'IE', 'Firefox', 'Chromium'],
 
 
     // Continuous Integration mode
