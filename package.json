@@ -4,6 +4,7 @@
   "description": "HTML5 WebStorage API for angular2",
   "scripts": {
     "compile": "tsc",
+    "aot": "npm run ngc -p ./tsconfig-aot.json",
     "pretest": "npm run compile",
     "test": "karma start test/karma.conf.js",
     "test:c": "concurrently \"tsc --watch --sourceMap\" \"karma start test/karma.conf.js --no-single-run\"",
@@ -14,12 +15,12 @@
   "author": "SirDarquan <https://github.com/SirDarquan>",
   "license": "ISC",
   "dependencies": {
-    "@angular/common": "^2.0.1",
-    "@angular/compiler": "^2.0.1",
-    "@angular/core": "^2.0.1",
-    "@angular/forms": "^2.0.1",
-    "@angular/platform-browser": "^2.0.1",
-    "@angular/platform-browser-dynamic": "^2.0.1",
+    "@angular/common": "~2.1.0",
+    "@angular/compiler": "~2.1.0",
+    "@angular/core": "~2.1.0",
+    "@angular/forms": "~2.1.0",
+    "@angular/platform-browser": "~2.1.0",
+    "@angular/platform-browser-dynamic": "~2.1.0",
     "es6-shim": "^0.35.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.12",
@@ -27,6 +28,8 @@
     "zone.js": "^0.6.25"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "~2.1.0",
+    "@angular/platform-server": "~2.1.0",
     "@types/es6-shim": "^0.31.2",
     "@types/jasmine": "^2.4.1",
     "codeclimate-test-reporter": "^0.3.1",
@@ -43,7 +46,7 @@
     "karma-source-map-support": "^1.2.0",
     "karma-systemjs": "^0.13.0",
     "single-page-server": "^0.1.0",
-    "typescript": "^2.0.0"
+    "typescript": "~2.0.0"
   },
   "peerDependencies": {}
 }
