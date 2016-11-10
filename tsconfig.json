@@ -5,6 +5,7 @@
 		"declaration": true,
 		"target": "es5",
 		"outDir": "dist",
+		"lib": ["es5", "dom", "scripthost", "es2015.symbol.wellknown"],
 		"forceConsistentCasingInFileNames": true
 	},
 	"exclude": [

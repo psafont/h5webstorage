@@ -42,6 +42,8 @@ export class MockOptions implements StorageOptions {
 }
 
 export class MockSerdes implements JSON {
+	readonly [Symbol.toStringTag]: "JSON";
+
 	stringify = (...args): string => JSON.stringify.apply(null, args);
 	parse = (...args): any => JSON.parse.apply(null, args)
 }
